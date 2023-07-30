@@ -39,14 +39,14 @@ router.route('/:id').delete((req, res) => {
 
 router.route('/update/:id').post((req, res) => {
   Workout.findById(req.params.id)
-    .then(exercise => {
-      workout.workout =req.body.workout;
+    .then(workout => {
+      workout.workoutname =req.body.workoutname;
       workout.reps =Number(req.body.reps);
       workout.weight = Number(req.body.weight);
       workout.comments = req.body.comments;
 
       workout.save()
-        .then(() => res.json('Exercise updated!'))
+        .then(() => res.json('Workout updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
