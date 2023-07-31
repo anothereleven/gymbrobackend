@@ -1,34 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Route, Router} from "react-router-dom";
+import { Route, Router, Routes} from "react-router-dom";
 import WorkoutList from './components/workout-list.component';
-import { Box } from '@mui/material/';
+import { AppBar, Box } from '@mui/material/';
 import { Grid } from '@mui/material/';
+import AppBarr from './components/app-bar';
+import {Container} from '@mui/material/';
+import CreateWorkout from './components/create-workout.component';
+import "bootstrap/dist/css/bootstrap.min.css" 
+import Navbar from './components/app-bar';
+import BMICalculator from './components/bmi-calculator';
+
+
 
 
 function App() {
   return (
-    <Box>
-   {/*} <Router>
-      <div>
+    <Container>
       <Navbar />
-        <br/>
-        <Route path="/" exact component={WorkoutList} />
-        <Route path="/edit/:id" component={EditExercise} />
-        <Route path="/create" component={CreateExercise} />
-        </div>
-  </Router>*/}
-  
-  <Grid container sx={{marginTop:"100px"}}>
-
-  <Grid item xs ={2}>
-    </Grid>
-    <WorkoutList/>
-    </Grid>
+    <Routes>
+      <Route path="/" element={<WorkoutList/>} /> {//always use element and not component(component is deprecated)
+}
+      <Route path="/create" element={<CreateWorkout/>} /> {//always use element and not component(component is deprecated)
+}      
+      <Route path="/BMI" element={<BMICalculator/>} /> {//always use element and not component(component is deprecated)
+}
     
-
-  </Box>
-
+      {//<WorkoutList/>
+}   </Routes>
+    </Container>
   );
 }
 

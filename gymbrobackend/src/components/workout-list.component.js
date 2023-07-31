@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Card, CardContent, Grid, Typography, CardActions } from '@mui/material';
+import { Button } from 'bootstrap';
+
 
 
 const Workout = props => (
@@ -16,12 +18,30 @@ const Workout = props => (
   </tr>
     
 )
+const Workout1 = props => (
+    <Card className="Workoutcard" sx={{margin:"10px", maxWidth:"1000px" , alignContent: "Left"}} variant="outlined">
+      <CardContent>
+       <Typography sx={{alignContent:"left"}}>{props.workout.workoutname}
+       </Typography>     
+       <Typography sx={{alignContent:"left"}}>x{props.workout.reps}
+       </Typography>   
+       <Typography sx={{alignContent:"left"}}>{props.workout.weight} lb
+       </Typography> 
+       <Typography sx={{alignContent:"left"}}>{props.workout.comments}
+       </Typography>
+      <a href="#" onClick={() => { props.deleteWorkout(props.workout._id) }}>delete</a>
+       
+    </CardContent>
+      
+    </Card>
+    
+)
 
 export default class WorkoutList extends Component {
   constructor(props) {
     super(props);
 
-    //this.deleteWorkout = this.deleteWorkout.bind(this)
+    this.deleteWorkout = this.deleteWorkout.bind(this)
 
     this.state = {workout: []};
   }
@@ -36,40 +56,27 @@ export default class WorkoutList extends Component {
       })
   }
 
-  //deleteExercise(id) {
-    //axios.delete('http://localhost:5000/workout/'+id)
-      //.then(response => { console.log(response.data)});
+  deleteWorkout(id) {
+    axios.delete('http://localhost:5000/workout/'+id)
+      .then(response => { console.log(response.data)});
 
-    //this.setState({
-      //exercises: this.state.workout.filter(el => el._id !== id)
-    //})
-  //}
+    this.setState({
+      workout: this.state.workout.filter(el => el._id !== id)
+    })
+  }
 
   workoutList() {
     return this.state.workout.map(currentworkout => {
-      return <Workout workout={currentworkout} deleteExercise={this.deleteWorkout} key={currentworkout._id}/>;
+      return <Workout1 workout={currentworkout} deleteWorkout={this.deleteWorkout} key={currentworkout._id}/>;
     })
   }
 
   render() {
     return (
-      <div>
-        <h3>Recorded Workouts</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Workout</th>
-              <th>Reps</th>
-              <th>Weight</th>
-              <th>Comments</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Box className='recorded-heading'>
+        <Typography sx={{p: 2}}>Recorded Workouts</Typography>
             { this.workoutList() }
-          </tbody>
-        </table>
-      </div>
+      </Box>
     )
   }
 }
