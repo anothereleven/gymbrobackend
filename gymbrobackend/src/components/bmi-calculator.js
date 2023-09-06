@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, TextField, Typography } from '@mui/material';
 
-
-
-
 export default class BMICalculator extends Component {
   constructor(props) {
     super(props);

@@ -29,9 +29,12 @@ const Workout1 = props => (
        </Typography> 
        <Typography sx={{alignContent:"left"}}>{props.workout.comments}
        </Typography>
-      <a href="#" onClick={() => { props.deleteWorkout(props.workout._id) }}>delete</a>
+       </CardContent>
+      <CardActions>
+      <button size="small" onClick={() => { props.deleteWorkout(props.workout._id) }}>Delete</button>
+    </CardActions>
        
-    </CardContent>
+    
       
     </Card>
     
