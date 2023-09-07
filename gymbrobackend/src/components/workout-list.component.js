@@ -39,6 +39,22 @@ const Workout1 = props => (
     </Card>
     
 )
+const Calender = props =>(
+<DateCalendar
+  defaultValue={initialValue}
+  loading={isLoading}
+  onMonthChange={handleMonthChange}
+  renderLoading={() => <DayCalendarSkeleton />}
+  slots={{
+    day: ServerDay,
+  }}
+  slotProps={{
+    day: {
+      highlightedDays,
+    } as any,
+  }}
+/>
+)
 
 export default class WorkoutList extends Component {
   constructor(props) {
